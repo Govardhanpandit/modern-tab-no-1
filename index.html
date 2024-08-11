@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabs</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eeffee;
+      }
+      .container {
+        width: 600px;
+        margin-top: 100px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
+      }
+      .tab_btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ccc;
+        padding: 10px 15px;
+        position: relative;
+        & .tab_links {
+          font-size: 20px;
+          border: none;
+          background: none;
+          font-weight: 700;
+          color: rgb(188, 186, 186);
+          padding: 2px 10px;
+
+          &:hover {
+            color: #b6bcfa;
+            cursor: pointer;
+          }
+        }
+      }
+      .tab-content {
+        font-family: Arial, Helvetica, sans-serif;
+        display: none;
+        & h1 {
+          font-size: 1.5rem;
+          font-weight: bolder;
+          padding: 5px;
+        }
+        & p {
+          font-size: 1.1rem;
+          padding: 10px 10px 20px 5px;
+        }
+        /* transition: all 3s ease-in-out; */
+        animation: moving 0.4s ease;
+      }
+      .container .tab_btn .line {
+        position: absolute;
+        bottom: 0;
+        left: 35px;
+        background-color: rgb(21, 0, 255);
+        height: 5px;
+        width: 76px;
+        border-radius: 5px;
+        transition: all 0.4s ease-in-out;
+        animation: bhagMilkhaBhag 1s ease-in-out;
+      }
+      .tab_btn .active {
+        color: rgb(21, 0, 255);
+      }
+      @keyframes bhagMilkhaBhag {
+        0% {
+          translate: 0, 30px;
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes moving {
+        from {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="tab_btn">
+        <button class="tab_links active">Home</button
+        ><button class="tab_links">About</button
+        ><button class="tab_links">Contact</button
+        ><button class="tab_links">Services</button>
+        <div class="line"></div>
+      </div>
+
+      <div class="tab-content">
+        <h1>Home</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
+          alias eaque architecto provident distinctio nobis minima incidunt ab
+          aliquam nam eius adipisci praesentium, molestiae optio, id accusantium
+          expedita quis quae.
+        </p>
+      </div>
+
+      <div class="tab-content">
+        <h1>About</h1>
+        <p>
+          architecto provident distinctio nobis minima incidunt ab aliquam nam
+          eius adipisci praesentium, molestiae optio, id accusantium expedita
+          quis quae.Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Molestias alias eaque architecto provident distinctio nobis minima
+          incidunt ab aliquam nam eius adipisci praesentium, molestiae optio, id
+          accusantium expedita quis quae.
+        </p>
+      </div>
+
+      <div class="tab-content">
+        <h1>Contact</h1>
+        <p>
+          adipisci praesentium, molestiae optio, id accusantium expedita quis
+          quae. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Molestias alias eaque architecto provident distinctio nobis minima
+          incidunt ab aliquam nam eius adipisci praesentium, molestiae optio, id
+          accusantium expedita quis quae.
+        </p>
+      </div>
+
+      <div class="tab-content">
+        <h1>Services</h1>
+        <p>
+          distinctio nobis minima incidunt ab aliquam nam eius adipisci
+          praesentium, molestiae optio, id accusantium expedita quis quae.Lorem
+          ipsum dolor sit amet consectetur adipisicing elit. Molestias alias
+          eaque architecto provident distinctio nobis minima incidunt ab aliquam
+          nam eius adipisci praesentium, molestiae optio, id accusantium
+          expedita quis quae.
+        </p>
+      </div>
+    </div>
+    <script>
+      let tab_content = document.querySelectorAll(".tab-content");
+      let mytabs = document.querySelector(".tab_btn");
+      tab_content[0].style.display = "block";
+      console.log(tab_content[1].display);
+      let tab_links = document.querySelectorAll(".tab_links");
+      let line = document.querySelector(".line");
+
+      for (i = 0; i < tab_links.length; i++) {
+        tab_links[i].addEventListener("click", function () {
+          let index = Array.prototype.indexOf.call(tab_links, this);
+
+          console.log(index);
+          for (i = 0; i < tab_links.length; i++) {
+            tab_links[i].classList.remove("active");
+            tab_content[i].style.display = "none";
+          }
+          this.classList.add("active");
+          line.style.width = this.offsetWidth + "px";
+          line.style.left = this.offsetLeft + "px";
+          // tab_content[i].style.display = "block";
+          tab_content[index].style.display = "block";
+        });
+      }
+    </script>
+  </body>
+</html>
